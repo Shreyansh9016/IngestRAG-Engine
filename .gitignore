@@ -1,25 +1,50 @@
-# Environments
+# ----------------------
+# Python Environments
+# ----------------------
 .env
+.env.*
 .venv/
 venv/
 env/
 ENV/
 env.bak/
 venv.bak/
+gptenv/
 
-# Byte-compiled / optimized / DLL files
+# ----------------------
+# Python cache
+# ----------------------
 __pycache__/
 *.py[cod]
 *$py.class
 
-# Mac OS
-.DS_Store
+# ----------------------
+# Build / Distribution
+# ----------------------
+build/
+dist/
+*.egg-info/
 
-# IDEs / Editors
+# ----------------------
+# OS files
+# ----------------------
+.DS_Store
+Thumbs.db
+
+# ----------------------
+# IDE / Editor
+# ----------------------
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# Project specific files
+# ----------------------
+# Logs
+# ----------------------
+*.log
+
+# ----------------------
+# Project specific
+# ----------------------
 interview_prep.txt
