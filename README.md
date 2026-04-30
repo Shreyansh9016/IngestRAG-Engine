@@ -1,63 +1,212 @@
-# IngestRAG-Engine
-A fully functional Python implementation of a Vector Database and RAG engine using FastAPI, Hugging Face via the Inference API, and Groq.
+<h1>🚀 IngestRAG-Engine</h1>
 
-## What This Project Does
+<p>
+A fully functional Python implementation of a <b>Vector Database + RAG Engine</b> 
+using <b>FastAPI</b>, <b>Groq</b>, and <b>Hugging Face Inference API</b>.
+</p>
 
-| Feature | Description |
-|---|---|
-| **3 Search Algorithms** | HNSW (production-grade), KD-Tree, Brute Force — run all three and compare speed |
-| **3 Distance Metrics** | Cosine similarity, Euclidean distance, Manhattan distance |
-| **16D Demo Vectors** | 20 pre-loaded semantic vectors across 4 categories (CS, Math, Food, Sports) |
-| **2D PCA Scatter Plot** | Live visualization of semantic space — watch clusters form |
-| **Real Document Embedding** | Paste any text → Groq embeds it  |
-| **RAG Pipeline** | Ask questions about your documents → HNSW retrieves context → local LLM answers |
-| **Full REST API** | CRUD endpoints: insert, delete, search, benchmark, hnsw-info |
+<hr>
 
-## How It Works
+<h2>✨ Features</h2>
 
-```
+<table>
+<tr><th>Feature</th><th>Description</th></tr>
+<tr>
+<td><b>3 Search Algorithms</b></td>
+<td>HNSW (production-grade), KD-Tree, Brute Force — compare performance</td>
+</tr>
+<tr>
+<td><b>3 Distance Metrics</b></td>
+<td>Cosine Similarity, Euclidean Distance, Manhattan Distance</td>
+</tr>
+<tr>
+<td><b>16D Demo Vectors</b></td>
+<td>20 semantic vectors across CS, Math, Food, Sports</td>
+</tr>
+<tr>
+<td><b>2D PCA Visualization</b></td>
+<td>Interactive scatter plot showing semantic clustering</td>
+</tr>
+<tr>
+<td><b>Real Embedding</b></td>
+<td>Convert real text → embeddings using Groq</td>
+</tr>
+<tr>
+<td><b>RAG Pipeline</b></td>
+<td>Query your documents → retrieve context → generate answer</td>
+</tr>
+<tr>
+<td><b>REST API</b></td>
+<td>Insert, delete, search, benchmark, HNSW info</td>
+</tr>
+</table>
+
+<hr>
+
+<h2>⚙️ How It Works</h2>
+
+<pre>
 Your Text
     │
     ▼
-  Groq                                ← converts text to a 768-dimensional vector
+Groq (Embedding)
     │
     ▼
-HNSW Index (C++)                   ← indexes the vector in a multilayer graph
+HNSW Index (Graph-based search)
     │
     ▼
-Semantic Search                    ← finds nearest neighbors in vector space
+Semantic Search (Nearest Neighbors)
     │
     ▼
-Groq (instant)                  ← reads retrieved chunks, generates an answer
+Groq (LLM Answer Generation)
     │
     ▼
-Answer
-```
+Final Answer
+</pre>
 
-**HNSW (Hierarchical Navigable Small World)** is the same algorithm used by Pinecone, Weaviate, Chroma, and Milvus. It builds a multilayer graph where each layer is progressively sparser — searches start at the top layer and zoom in, achieving O(log N) complexity instead of O(N) for brute force.
+<p>
+<b>HNSW (Hierarchical Navigable Small World)</b> builds a multi-layer graph 
+to achieve <b>O(log N)</b> search complexity — far faster than brute force.
+</p>
 
----
+<hr>
 
-## Requirements
-- Python 3.9+
-- Install dependencies: `pip install -r requirements.txt`
+<h2>🧰 Requirements</h2>
 
-## Configuration
-This project uses a `.env` file for API key management. Before running the server, create a `.env` file in the project root directory and add your keys:
+<ul>
+<li>Python 3.9+</li>
+<li>pip (Python package manager)</li>
+</ul>
 
-```env
-GROQ_API_KEY="your_groq_api_key_here"
-HF_API_KEY="your_huggingface_api_key_here_optional"
-```
+<hr>
 
-*Note: Groq is required for text generation via the local LLM integration. Hugging Face is used for embeddings.*
+<h2>🔧 Setup Guide (Step-by-Step)</h2>
 
-## Running the Server
-Start the FastAPI server via Uvicorn from the project root directory:
-```bash
-uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload
-```
+<h3>1️⃣ Clone the Repository</h3>
 
-## Usage
-Once the server is running, visit [http://localhost:8080](http://localhost:8080) to interact with the frontend UI.
-You can view the detailed documentation on how the vector indexing algorithms and features work in `usage.md`.
+<pre><code>git clone https://github.com/your-username/IngestRAG-Engine.git
+cd IngestRAG-Engine</code></pre>
+
+<hr>
+
+<h3>2️⃣ Create Virtual Environment</h3>
+
+<p><b>Windows:</b></p>
+<pre><code>python -m venv venv</code></pre>
+
+<p><b>Mac/Linux:</b></p>
+<pre><code>python3 -m venv venv</code></pre>
+
+<hr>
+
+<h3>3️⃣ Activate Virtual Environment</h3>
+
+<p><b>Windows (PowerShell / CMD):</b></p>
+<pre><code>venv\Scripts\activate</code></pre>
+
+<p><b>Mac/Linux:</b></p>
+<pre><code>source venv/bin/activate</code></pre>
+
+<p>
+After activation, your terminal should show:
+<code>(venv)</code>
+</p>
+
+<hr>
+
+<h3>4️⃣ Install Dependencies</h3>
+
+<pre><code>pip install -r requirements.txt</code></pre>
+
+<hr>
+
+<h3>5️⃣ Set Environment Variables</h3>
+
+<p>Create a <code>.env</code> file in the root directory:</p>
+
+<pre><code>GROQ_API_KEY="your_groq_api_key_here"
+HF_API_KEY="your_huggingface_api_key_here_optional"</code></pre>
+
+<p>
+<b>Note:</b><br>
+Groq → required for LLM responses<br>
+Hugging Face → used for embeddings (optional fallback)
+</p>
+
+<hr>
+
+<h3>6️⃣ Run the Server</h3>
+
+<pre><code>uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload</code></pre>
+
+<hr>
+
+<h2>🌐 Usage</h2>
+
+<p>
+Once running, open:
+</p>
+
+<p>
+👉 <a href="http://localhost:8080">http://localhost:8080</a>
+</p>
+
+<ul>
+<li>Use the UI for semantic search & RAG queries</li>
+<li>Test APIs via Swagger docs</li>
+</ul>
+
+<hr>
+
+<h2>📡 API Endpoints</h2>
+
+<ul>
+<li><code>/insert</code> → Add vectors</li>
+<li><code>/search</code> → Query nearest neighbors</li>
+<li><code>/delete</code> → Remove vectors</li>
+<li><code>/benchmark</code> → Compare algorithms</li>
+<li><code>/hnsw-info</code> → View index structure</li>
+</ul>
+
+<hr>
+
+<h2>📊 Tech Stack</h2>
+
+<ul>
+<li>FastAPI</li>
+<li>Groq LLM</li>
+<li>Hugging Face Inference API</li>
+<li>NumPy / SciPy</li>
+<li>Custom HNSW Implementation</li>
+</ul>
+
+<hr>
+
+<h2>📌 Future Improvements</h2>
+
+<ul>
+<li>Docker deployment</li>
+<li>Cloud vector DB integration</li>
+<li>Authentication & multi-user support</li>
+<li>Streaming responses</li>
+</ul>
+
+<hr>
+
+<h2>🤝 Contributing</h2>
+
+<p>
+Pull requests are welcome! Feel free to fork and improve.
+</p>
+
+<hr>
+
+<h2>📜 License</h2>
+
+<p>
+MIT License
+</p>
+
+<hr>
+
+<h3>⭐ If you like this project, give it a star on GitHub!</h3>
