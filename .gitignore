@@ -48,3 +48,27 @@ Thumbs.db
 # Project specific
 # ----------------------
 interview_prep.txt
+
+# ----------------------
+# HF / Deployment / AI specific
+# ----------------------
+
+# HuggingFace cache
+.cache/
+huggingface/
+hf_home/
+
+# Vector DB / embeddings (VERY IMPORTANT for your project)
+vector_db/
+*.faiss
+*.pkl
+*.db
+
+# Large files
+*.bin
+*.pt
+*.onnx
+
+# Temporary files
+tmp/
+temp/
